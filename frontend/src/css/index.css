@@ -1,0 +1,165 @@
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+  .img-extra {
+    font-size: 25px !important;
+    height: 150px !important;
+  }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+  .img-extra {
+    font-size: 30px !important;
+    height: 200px !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.img-extra {
+  background: linear-gradient(rgba(0, 0, 0, 0.450), rgba(0, 0, 0, 0.500)),
+    url('../../public/img/anvat4.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 230px;
+  color: rgb(215, 209, 209);
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.img-login-register {
+  background: linear-gradient(rgba(23, 15, 52, 0.5), rgba(23, 15, 52, 0.5)),
+    url('../../public/img/anh3.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.font-size_small {
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+h2 {
+  margin: 24px 0 5px 0;
+  font-weight: 500;
+}
+
+.text-gray {
+  font-weight: 550;
+  color: #6e7073;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.remove-text-decoration {
+  text-decoration: none;
+}
+
+button:disabled {
+  background-color: rgb(209, 209, 209);
+  color: rgb(91, 88, 88);
+}
+
+button:disabled:hover {
+  background-color: rgb(209, 209, 209) !important;
+  color: rgb(91, 88, 88) !important;
+  cursor: unset !important;
+}
+
+/* Container chính */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Định nghĩa cho các cột */
+.col {
+  box-sizing: border-box;
+}
+
+.col-12 {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+.col-1 {
+  flex: 1 1 calc(8.33% - 16px);
+  max-width: calc(8.33% - 16px);
+}
+
+.col-2 {
+  flex: 1 1 calc(16.33% - 16px);
+  max-width: calc(16.33% - 16px);
+}
+
+.col-3 {
+  flex: 1 1 calc(25% - 16px);
+  max-width: calc(25% - 16px);
+}
+
+.col-4 {
+  flex: 1 1 calc(33.33% - 16px);
+  max-width: calc(33.33% - 16px);
+}
+
+.col-5 {
+  flex: 1 1 calc(41.66% - 16px);
+  max-width: calc(41.66% - 16px);
+}
+
+.col-6 {
+  flex: 1 1 calc(50% - 16px);
+  max-width: calc(50% - 16px);
+}
+
+.col-7 {
+  flex: 1 1 calc(58.33% - 16px);
+  max-width: calc(58.33% - 16px);
+}
+
+.col-8 {
+  flex: 1 1 calc(66.66% - 16px);
+  max-width: calc(66.66% - 16px);
+}
+
+.col-9 {
+  flex: 1 1 calc(75% - 16px);
+  max-width: calc(75% - 16px);
+}
+
+.col-10 {
+  flex: 1 1 calc(83.33% - 16px);
+  max-width: calc(83.33% - 16px);
+}
+
+.mt-4 {
+  margin-top: 4px;
+}

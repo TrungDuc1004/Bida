@@ -1,0 +1,114 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {
+
+    .allorder-list {
+        padding: 20px 0 0px !important;
+    }
+}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+    .allorder-list:has(.all-order-empty) {
+        padding: 0 0 120px !important;
+    }
+
+    .allorder-item_img {
+        max-width: 100%;
+    }
+
+    .allorder-item {
+        min-height: 90px;
+        padding: 0 15px !important;
+    }
+
+    .allorder-list:has(.cart-allorder-empty) {
+        padding-bottom: 120px !important;
+    }
+
+    .allorder-title div {
+        font-size: 15px !important;
+    }
+
+    .allorder-item_info h5 {
+        height: 35px !important;
+    }
+
+    .allorder-item_info h5 {
+        font-size: 12px !important;
+    }
+
+    .allorder-item_newprice p {
+        font-size: 12px;
+    }
+
+    .allorder-item_createdAt p {
+        font-size: 12px;
+    }
+}
+
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {}
+
+.allorder-list:has(.all-order-empty) {
+    padding-bottom: 150px;
+}
+
+.all-order-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -80px;
+}
+
+.allorder-list:has(.cart-allorder-empty) {
+    padding-bottom: 150px;
+}
+
+.allorder-list {
+    padding: 0px 5px 0px;
+    border-left: 2px solid rgb(231, 230, 230);
+}
+
+.allorder-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dadee3;
+    text-align: center;
+}
+
+.allorder-item_img {
+    width: 100%;
+}
+
+.allorder-item_img img {
+    width: 100%;
+}
+
+.allorder-title {
+    border-bottom: 1px solid #dadee3;
+}
+
+.allorder-title .col {
+    padding: 0px 0px 15px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #0a1d37;
+    text-align: center;
+}
+
+.allorder-item_info h5 {
+    margin: 0;
+    padding-bottom: 7px;
+    font-size: 17px;
+    font-weight: 400;
+    color: rgb(59, 58, 58);
+    width: 95%;
+    height: 48px;
+    align-items: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}

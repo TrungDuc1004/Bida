@@ -1,0 +1,253 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {
+
+  .nav-header-between {
+    display: none;
+  }
+
+  .faList {
+    padding-left: 20px;
+    display: block !important;
+  }
+
+  /* hidden text dangnhap */
+  .nav-header-right_sign p {
+    display: none;
+  }
+
+  /* hiden username */
+  .nav-user-straightline p {
+    display: none;
+  }
+
+  /* hidden list i4 */
+  .nav-user:hover .nav-user-infor {
+    display: none !important;
+  }
+
+  /* xuly */
+  #checkbox_navbar:checked~.overlay_navbar {
+    display: block;
+  }
+
+  #checkbox_navbar:checked~.nav-tab-hidden {
+    display: block;
+    z-index: 1;
+  }
+
+  /* tab */
+  .nav-user-together {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 60px;
+  }
+}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+  .nav {
+    padding: 15px 20px !important;
+  }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+  .nav {
+    padding: 18px 20px !important;
+  }
+
+  .faList {
+    margin-right: 15px;
+  }
+
+  .nav-tab-hidden {
+    width: 40% !important;
+  }
+}
+
+/* responsive */
+.overlay_navbar {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav-tab-hidden {
+  display: none;
+  width: 50%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+#checkbox_navbar {
+  display: none;
+}
+
+/* ee */
+
+.name-shop {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: #0a1d37;
+  font-size: 23px;
+  text-decoration: none;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: rgb(235, 236, 241);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+}
+
+.nav-header-between {
+  text-align: center;
+  font-size: 16.5px;
+}
+
+.nav-header-between_home {
+  text-decoration: none;
+  margin-right: 30px;
+  color: #0a1d37
+}
+
+.nav-header-between_table {
+  text-decoration: none;
+  margin-right: 30px;
+  color: #0a1d37
+}
+
+.nav-header-between_shop {
+  text-decoration: none;
+  margin-right: 30px;
+  color: #0a1d37;
+}
+
+.nav-header-between_cart {
+  text-decoration: none;
+  color: #0a1d37;
+}
+
+.nav-header-between a.active {
+  font-weight: bold;
+  border-bottom: 2px solid #0a1d37;
+}
+
+.nav-header-right {
+  font-size: 16.5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-header-right_cart {
+  color: #0a1d37;
+  text-decoration: none;
+  padding-right: 15px;
+}
+
+.nav-header-right_cart:hover {
+  color: #0758c9
+}
+
+.nav-user {
+  display: flex;
+  position: relative;
+  padding-left: 5px;
+}
+
+.nav-user:hover {
+  cursor: pointer;
+}
+
+.nav-user:hover .nav-user-infor {
+  display: block;
+}
+
+.nav-user-straightline {
+  display: flex;
+  align-items: center;
+}
+
+.nav-user-straightline img {
+  width: 30px;
+}
+
+.nav-user-straightline p {
+  font-size: 13.5px;
+  font-weight: 500;
+  padding-left: 5px;
+}
+
+.nav-user-infor {
+  display: none;
+  position: absolute;
+  top: 100%;
+  min-width: 70%;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 5px 5px 5px rgba(18, 17, 17, 0.1);
+}
+
+.nav-user-together {
+  padding: 7px 10px;
+  text-align: center;
+  border-bottom: 1px solid rgb(236, 235, 235);
+}
+
+.nav-user-together:hover {
+  background-color: rgb(242, 239, 239);
+  border-radius: 5px;
+}
+
+.nav-user-link {
+  text-decoration: none;
+  color: #0a1d37;
+}
+
+.nav-user-link:hover {
+  color: #2565c0;
+}
+
+.faBowlingBall {
+  padding-right: 10px;
+}
+
+.faUser {
+  padding-right: 5px;
+}
+
+.faList {
+  display: none;
+}
+
+.faList:hover {
+  color: #0758c9;
+  cursor: pointer;
+}
+
+.nav-header-right_sign {
+  display: flex;
+  align-items: center;
+  color: #0a1d37;
+  text-decoration: none;
+}
+
+.nav-header-right_sign:hover {
+  color: #0758c9
+}

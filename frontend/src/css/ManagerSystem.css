@@ -1,0 +1,55 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {
+
+    .commit-manager-system {
+        flex-direction: column;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .nav-manager-left {
+        flex-direction: row !important;
+        flex: 1 1 100%;
+        max-width: 100%;
+        gap: 24px !important;
+    }
+
+    .nav-manager-left button {
+        flex: 1 1 calc(33.33% - 16px);
+        max-width: calc(33.33% - 16px);
+        box-sizing: border-box;
+    }
+
+    .nav-manager-right {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+.commit-manager-system {
+    display: flex;
+    padding: 15px 0;
+    gap: 5px;
+}
+
+.nav-manager-left {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(246, 244, 244);
+    gap: 5px;
+}
+
+.nav-manager-left button {
+    padding: 13.5px;
+}
+
+.nav-manager-left:hover button {
+    cursor: pointer;
+}
+
+.nav-manager_active {
+    color: rgb(8, 109, 198);
+    background-color: rgb(211, 224, 239);
+    border: none;
+    border-right: 4px solid rgb(108, 136, 203);
+}

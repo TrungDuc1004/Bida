@@ -1,0 +1,95 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+    .register-form {
+        width: 90% !important;
+    }
+    .register-title {
+        font-size: 28px !important;
+    }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+    .register-form {
+        width: 45% !important;
+    }
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    padding: 3% 0 5% 0;
+}
+
+.register-title {
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-size: 30px;
+    padding-bottom: 1.5%;
+    z-index: 1;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    position: relative;
+    background-color: #0a1d37;
+    border-radius: 1vh;
+    width: 28%;
+    min-height: 200px;
+    padding: 24px 12px;
+    box-shadow: 0 0 30px rgb(244, 244, 246);
+}
+
+.register-form input {
+    width: 100%;
+    align-self: center;
+    padding: 3.5%;
+    border-radius: 1vh;
+}
+
+.register-form button {
+    width: 30%;
+    padding: 3.5%;
+    margin-top: 8%;
+    margin-bottom: 0;
+    border-radius: 5px;
+    border: none;
+    color: #0a1d37;
+    background-color: white;
+    align-self: center;
+}
+
+.register-form button:hover {
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #0758c9;
+}
+
+.register-question {
+    color: white;
+    align-self: center;
+    margin-top: 3%;
+}
+
+.register span {
+    position: absolute;
+    align-self: center;
+    color: orange;
+    font-size: 2.5vh;
+    bottom: 218px;
+}
+
+.link-to_login {
+    color: orange;
+}
+
+.link-to_login:hover {
+    color: white;
+}

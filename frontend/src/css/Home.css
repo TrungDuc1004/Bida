@@ -1,0 +1,179 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {
+    .home {
+        padding: 20px 20px !important;
+    }
+
+    .commit-sign {
+        padding: 20px 20px !important;
+    }
+}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+    .home {
+        flex-direction: column-reverse;
+    }
+
+    .introduce-home {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .img-home {
+        flex: 1 1 100%;
+        max-width: 100%;
+        justify-content: center !important;
+    }
+
+    /* sign */
+    .commit-sign {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sign {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+
+    .sign {
+        flex: 1 1 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+    }
+}
+/*  */
+.home {
+    background-color: #d6e5fb;
+    display: flex;
+    align-items: center;
+}
+
+.img-background {
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.450), rgba(0, 0, 0, 0.500)),
+    url('../../public/img/bida.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  color: rgb(215, 209, 209);
+  font-size: 32px;
+  font-weight: 500;
+  padding: 0 80px;
+}
+.home_image{
+    display: flex;
+    justify-content: center;
+}
+.home_image img{
+    width: 80%;
+    
+}
+.home p {
+    padding: 20px 0;
+    font-size: 18px;
+    line-height: 28px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.home span {
+    font-size: 35px;
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.home button {
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 12px 30px;
+    margin-top: 25px;
+    background-color: #0a1d37;
+    color: white;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.home button:hover {
+    cursor: pointer;
+    background-color: #0758c9;
+    transform: scale(1.07);
+}
+
+.commit-sign {
+    padding: 60px 80px;
+    color: rgb(9, 14, 19);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.sign {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 100px;
+    justify-content: center;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.commit-sign_green {
+    background-color: rgb(198, 230, 198);
+}
+
+.commit-sign_green:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.commit-sign_orange {
+    background-color: rgb(230, 211, 180);
+}
+
+.commit-sign_orange:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.commit-sign_blue {
+    background-color: rgb(181, 214, 228);
+}
+
+.commit-sign_blue:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.commit-sign_yellow {
+    background-color: rgb(239, 239, 188);
+}
+
+.commit-sign_yellow:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.commit-sign_green-award {
+    font-size: 30px;
+    padding-right: 25px;
+}
+
+.commit-sign_blue-headset {
+    font-size: 30px;
+    padding-right: 25px;
+}
+
+.commit-sign_orange-swap {
+    font-size: 30px;
+    padding-right: 25px;
+}
+
+.commit-sign_yellow-truck {
+    font-size: 30px;
+    padding-right: 25px;
+}

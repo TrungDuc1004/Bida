@@ -1,0 +1,287 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+    .allaccount-list:has(.allaccount-order-empty) {
+        padding: 0 0 120px !important;
+    }
+
+    .newPrice-red {
+        font-size: 14px;
+    }
+
+    .allaccount-item_info h5 {
+        font-size: 16px !important;
+    }
+
+    .allaccount-item_total {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: none !important;
+        min-width: 90%;
+        top: 5px !important;
+        left: 25px;
+    }
+
+    .allaccount-title .col {
+        font-size: 13px !important;
+    }
+
+
+    /* swap col-2 */
+    .allaccount-title .col-1 {
+        flex: 1 1 calc(16.33% - 16px);
+        max-width: calc(16.33% - 16px);
+    }
+
+    /* swap col-5 */
+    .allaccount-title .col-4 {
+        flex: 1 1 calc(41.66% - 16px);
+        max-width: calc(41.66% - 16px);
+    }
+
+    /* swap col-2 */
+    .allaccount-item_img {
+        flex: 1 1 calc(16.33% - 16px);
+        max-width: calc(16.33% - 16px);
+    }
+
+    /* swap col-5 */
+    .allaccount-item_info {
+        flex: 1 1 calc(41.66% - 16px);
+        max-width: calc(41.66% - 16px);
+    }
+
+    /* empty */
+    .allaccount-order-empty p {
+        font-size: 16px;
+    }
+
+    .allaccount-order-empty img {
+        width: 100%;
+    }
+
+    .allaccount-link {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .col-5 {
+        flex: 1 1 calc(33.33% - 16px);
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+    .allaccount-item_total {
+        top: 18px !important;
+        right: 60px !important
+    }
+
+    /* empty */
+    .allaccount-order-empty p {
+        font-size: 17px !important;
+    }
+
+    .allaccount-order-empty img {
+        width: 100%;
+    }
+}
+
+/* . */
+.allaccount-list:has(.allaccount-order-empty) {
+    padding-bottom: 150px;
+}
+
+.allaccount-list {
+    position: relative;
+    border-left: 2px solid rgb(231, 230, 230);
+}
+
+.allaccount-title {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #dadee3;
+}
+
+.allaccount-title .col {
+    padding: 0px 0px 15px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #0a1d37;
+}
+
+.allaccount {
+    display: flex;
+    justify-content: end;
+    background-color: rgb(243, 243, 243);
+    margin-bottom: 15px;
+}
+
+.allaccount button {
+    color: white;
+    background-color: #0a1d37;
+    text-decoration: none !important;
+    border: 2px solid #145eac;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.allaccount-link button {
+    width: 100%;
+}
+
+.allaccount-link:hover button {
+    border-radius: 5px;
+    background-color: #145eac;
+    cursor: pointer;
+}
+
+.allaccount-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #dadee3;
+}
+
+.allaccount-link_update {
+    text-decoration: none;
+    color: #086bd5;
+}
+
+.allaccount-link_update:hover {
+    color: rgb(218, 88, 88);
+}
+
+.allaccount-item_img {
+    padding: 0;
+}
+
+.allaccount-item_img img {
+    width: 100%;
+    min-height: 65px;
+}
+
+.allaccount-item_info h5:hover {
+    text-decoration: underline;
+    color: #145eac;
+}
+
+.allaccount-item_info p {
+    padding-bottom: 7px;
+}
+
+.allaccount-item_quantity {
+    display: flex;
+    align-items: center;
+}
+
+.allaccount-item_quantity p {
+    color: red;
+    font-size: 14px;
+}
+
+.allaccount-item_quantity button {
+    width: 35px;
+    height: 35px;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+.allaccount-item_quantity button:hover {
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.trashcan {
+    margin-left: 40px;
+    font-size: 20px;
+    color: rgb(214, 15, 15);
+}
+
+.trashcan:hover {
+    cursor: pointer;
+}
+
+.allaccount-order-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -80px;
+}
+
+.allaccount-order-empty_back {
+    margin: 35px 0;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.allaccount-item_total {
+    width: 100%;
+    min-height: 123px;
+    position: absolute;
+    top: 27px;
+    right: 90px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    background-color: #0a1d37;
+    border: 1px solid rgb(184, 178, 178);
+}
+
+.allaccount-item_total p {
+    font-size: 17px;
+}
+
+.allaccount-item_total h4 {
+    font-size: 20px;
+    padding: 8px 0;
+    text-align: center;
+}
+
+.allaccount-item_total button {
+    width: 100%;
+    background-color: white;
+    color: #0a1d37;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.allaccount-item_total button:hover {
+    cursor: pointer;
+    color: white;
+    border: 1.5px solid #6c86ab;
+    background-color: #264871;
+}
+
+.webkit-email {
+    overflow: hidden;
+    display: -webkit-box;
+}
+
+.webkit-password {
+    overflow: hidden;
+    display: -webkit-box;
+    width: 90%;
+    height: 45px;
+}
+
+.webkit-address {
+    font-size: 18px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 48px;
+}
