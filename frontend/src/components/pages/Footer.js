@@ -36,13 +36,13 @@ function Footer() {
                     <p>Liên kết hữu ích
                         <br />
                         <li>
-                            <Link className='footer-link' to='/'>Trang chủ</Link>
+                            <Link className='footer-link' to='/'>Trang Chủ</Link>
                         </li>
                         <li>
-                            <Link className='footer-link' to='/cart'>Giỏ hàng</Link>
+                            <Link className='footer-link' to='/cart'>Giỏ Hàng</Link>
                         </li>
                         <li>
-                            <Link className='footer-link' to='/login'>Đăng nhập</Link>
+                            <Link className='footer-link' to='/login'>Đăng Nhập</Link>
                         </li>
                     </p>
                 </ul>

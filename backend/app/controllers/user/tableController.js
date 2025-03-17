@@ -5,9 +5,8 @@ const bcrypt = require('bcrypt');
 // 🏓 1️⃣ Tạo bàn bida mới (POST /tables/create)
 exports.createTable = async (req, res) => {
     try {
-        const { name, image, status } = req.body;
+        const { name, image, description, oldPrice, newPrice, location, category, status } = req.body;
 
-        // Kiểm tra dữ liệu đầu vào
         if (!name || !image) {
             return res.status(400).json({ message: "Vui lòng nhập đủ thông tin!" });
         }
@@ -15,7 +14,12 @@ exports.createTable = async (req, res) => {
         const newTable = new Table({
             name,
             image,
-            status: status || "available" // Mặc định bàn trống
+            description,
+            oldPrice,
+            newPrice,
+            location,
+            category,
+            status: status || "available" // Mặc định là bàn trống
         });
 
         await newTable.save();
@@ -65,30 +69,31 @@ exports.deleteTable = async (req, res) => {
 };
 
 // 🏓 5️⃣ Lấy danh sách bàn bida (GET /tables)
-exports.getTable = async (req, res) => {
+exports.getAllTables = async (req, res) => {
     try {
-        const { category, sort, q, page = 1, limit = 8 } = req.query;
+        const { status, category, sort, q, page = 1, limit = 8 } = req.query;
         const skip = (page - 1) * limit;
 
-        // Bộ lọc
         const filter = {};
+        if (status) filter.status = status; // Lọc theo trạng thái nếu có
         if (category && category !== "Tất cả") filter.category = category;
-        if (q) filter.name = { $regex: q, $options: "i" }; // Tìm kiếm không phân biệt hoa thường
+        if (q) filter.name = { $regex: q, $options: "i" };
 
-        const [tables, total] = await Promise.all([
-            Table.find(filter)
-                .sort(sort === "asc" ? { newPrice: 1 } : { newPrice: -1 })
-                .skip(skip)
-                .limit(parseInt(limit)),
-            Table.countDocuments(filter),
-        ]);
+        const tables = await Table.find(filter)
+            .sort(sort === "asc" ? { name: 1 } : { name: -1 })
+            .skip(skip)
+            .limit(parseInt(limit));
 
-        res.json({ data: tables, total, totalPages: Math.ceil(total / limit), page: parseInt(page) });
+        if (tables.length === 0) {
+            return res.status(404).json({ message: "Không tìm thấy bàn nào phù hợp!" });
+        }
+
+        res.json({ data: tables, total: tables.length });
     } catch (error) {
-        res.status(500).json({ message: "Lỗi khi lấy danh sách bàn!", error: error.message });
+        console.error("Lỗi lấy danh sách bàn:", error);
+        res.status(500).json({ message: "Lỗi server!", error: error.message });
     }
 };
-
 // 🏓 6️⃣ Lấy chi tiết bàn bida theo slug (GET /tables/:slug)
 exports.getTableBySlug = async (req, res) => {
     try {
@@ -102,59 +107,25 @@ exports.getTableBySlug = async (req, res) => {
     }
 };
 
-// 🏓 7️⃣ Đặt bàn bida (POST /tables/book)
-exports.bookTable = async (req, res) => {
+// 🏓 Lấy danh sách bàn bida có thể đặt (GET /tables)
+exports.getAvailableTables = async (req, res) => {
     try {
-        const { tableId, userId, timeSlot } = req.body;
+        const { selectedTime } = req.query;
 
-        // Kiểm tra đầu vào
-        if (!tableId || !userId || !timeSlot) {
-            return res.status(400).json({ message: "Thiếu thông tin đặt bàn!" });
+        if (!selectedTime || isNaN(Date.parse(selectedTime))) {
+            return res.status(400).json({ error: "Thời gian không hợp lệ!" });
         }
 
-        const table = await Table.findById(tableId);
-        if (!table) {
-            return res.status(404).json({ message: "Không tìm thấy bàn bida." });
-        }
+        // Lấy danh sách bàn đã đặt vào thời gian đó
+        const bookedTables = await Booking.find({ "tables.time": selectedTime }).distinct("tables.tableId");
 
-        // Kiểm tra bàn có trống không
-        if (table.status !== "available") {
-            return res.status(400).json({ message: "Bàn này đã được đặt!" });
-        }
+        // Lấy danh sách bàn còn trống
+        const availableTables = await Table.find({ _id: { $nin: bookedTables }, status: "available" });
 
-        // Cập nhật trạng thái bàn
-        table.status = "booked";
-        table.bookedBy = userId;
-        table.bookedTime = timeSlot;
-        await table.save();
-
-        res.status(200).json({ message: "Đặt bàn thành công!", table });
+        res.json({ success: true, availableTables });
     } catch (error) {
-        res.status(500).json({ message: "Lỗi khi đặt bàn!", error: error.message });
+        console.error("Lỗi lấy bàn trống:", error);
+        res.status(500).json({ error: "Lỗi server!" });
     }
 };
 
-// 🏓 8️⃣ Hủy đặt bàn (POST /tables/cancel/:id)
-exports.cancelBooking = async (req, res) => {
-    try {
-        const table = await Table.findById(req.params.id);
-        if (!table) {
-            return res.status(404).json({ message: "Không tìm thấy bàn bida." });
-        }
-
-        // Kiểm tra bàn đã đặt chưa
-        if (table.status !== "booked") {
-            return res.status(400).json({ message: "Bàn này chưa được đặt!" });
-        }
-
-        // Hủy đặt bàn
-        table.status = "available";
-        table.bookedBy = null;
-        table.bookedTime = null;
-        await table.save();
-
-        res.status(200).json({ message: "Hủy đặt bàn thành công!", table });
-    } catch (error) {
-        res.status(500).json({ message: "Lỗi khi hủy đặt bàn!", error: error.message });
-    }
-};

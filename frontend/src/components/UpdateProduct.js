@@ -4,6 +4,7 @@ import { ToastContext } from "./contexts/ToastContext";
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import '../css/CreateProduct.css' // form giong nhau nen dung lai
+import api from '../api/Axios';
 
 function UpdateProduct() {
     const { id } = useParams();
@@ -24,7 +25,7 @@ function UpdateProduct() {
         if (!token) {
             console.error('Người dùng chưa đăng nhập.');
         } else {
-            axios.get(`http://localhost:5000/products/update/${id}/edit`, {
+            api.get(`/products/update/${id}/edit`, {
                 headers: {
                     Authorization: `Bearer ${token}` // Gửi token trong header
                 }
@@ -61,7 +62,7 @@ function UpdateProduct() {
         if (!localStorage.getItem('token')) {
             showToast({ title: "Bạn cần đăng nhập trước!", type: "warning" });
         } else {
-            axios.put(`http://localhost:5000/products/update/${id}`, productData, {
+            api.put(`s/products/update/${id}`, productData, {
                 headers: {
                     Authorization: `Bearer ${token}` // Gửi token trong header
                 }

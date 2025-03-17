@@ -1,8 +1,9 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import '../css/Register.css'
+import api from "../api/Axios";
 
 function Register() {
     const [usernameInput, setUsernameInput] = useState('');
@@ -13,7 +14,7 @@ function Register() {
     const handleRegister = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:5000/user/register', {
+        api.post('/user/register', {
             username: usernameInput, email, password
         })
             .then((response) => {

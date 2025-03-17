@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../css/Checkout.css'
+import api from "../api/Axios";
 
 function Checkout() {
     const { username, phonenumber, address, city, country } = useContext(ProfileContext)
@@ -43,14 +44,14 @@ function Checkout() {
         };
 
         if (products.length > 0) {
-            axios.post('http://localhost:5000/order', orderData,
+            api.post('/order', orderData,
                 {
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
                 })
                 .then(response => {
                     showToast({ title: "Đặt hàng thành công!", type: "success" });
                     //update products trong cart
-                    axios.put('http://localhost:5000/cart')
+                    api.put('/cart')
                         .then(response => { })
                         .catch(error => {
                             console.error('Error creating product:', error);

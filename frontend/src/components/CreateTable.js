@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/Axios';
 import "../css/CreateTable.css";
+import api from '../api/Axios';
 
 function CreateTable() {
     const [name, setName] = useState('');
@@ -18,10 +18,11 @@ function CreateTable() {
         e.preventDefault();
         const tableData = { name, description, image, oldPrice, newPrice, location, category };
 
-        api.post('http://localhost:5000/tables/create', tableData)
+        api.post('/table/create', tableData)
+        
             .then(response => {
                 alert('Thêm bàn thành công!');
-                navigate("/admin/tables");
+                navigate("/manager/admin");
             })
             .catch(error => {
                 alert('Thất bại!');

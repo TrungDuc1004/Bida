@@ -1,11 +1,50 @@
-/* src/css/TableList.css */
-.table-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    text-align: center;
+/* ========== Responsive Design ========== */
+
+/* Mobile & Tablet: width <= 1024px */
+@media only screen and (max-width: 63.9375em) {
+    .table-list {
+        padding: 20px;
+    }
 }
 
+/* Mobile: width < 740px */
+@media only screen and (max-width: 46.1875em) {
+    .table-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
+    .table-image {
+        height: 400px !important;
+    }
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .table-item {
+        flex: 1 1 calc(33.33% - 16px);
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+/* ========== General Styles ========== */
+.table-container {
+    padding: 30px 80px;
+    text-align: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.table-container input {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* ========== Table List ========== */
 .table-list {
     display: flex;
     flex-wrap: wrap;
@@ -14,31 +53,93 @@
 }
 
 .table-item {
-    width: 300px;
-    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.table-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .table-image {
+    border-radius: 5px;
     width: 100%;
-    height: 180px;
+    height: 260px;
     object-fit: cover;
-    border-radius: 10px;
 }
 
+.table-details {
+    padding: 10px;
+    text-align: left;
+}
+
+.table-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: black;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+}
+
+.table-title:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+.table-price {
+    font-weight: 600;
+    color: #dc3545;
+    font-size: 16px;
+}
+
+/* ========== Booking Button ========== */
 .book-btn {
-    display: inline-block;
+    display: flex;
+    width: 100%;
     margin-top: 10px;
-    padding: 8px 15px;
-    background: #007bff;
-    color: white;
-    text-decoration: none;
+    padding: 10px;
+    background-color: #007bff;
     border-radius: 5px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .book-btn:hover {
-    background: #0056b3;
+    cursor: pointer;
+    background-color: #0056b3;
+}
+
+.book-btn:active {
+    transform: scale(0.95);
+}
+
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 1024px) {
+    .table-item {
+        flex: 1 1 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+    }
+}
+
+@media (max-width: 740px) {
+    .table-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
 }

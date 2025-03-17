@@ -4,6 +4,7 @@ import { ToastContext } from "./contexts/ToastContext";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import '../css/CreateProduct.css'
+import api from '../api/Axios';
 
 function CreateProduct() {
     const [name, setName] = useState('');
@@ -36,7 +37,7 @@ function CreateProduct() {
         if (!token) {
             showToast({ title: "Bạn cần đăng nhập trước!", type: "warning" });
         } else {
-            axios.post('http://localhost:5000/products/create', productData, {
+            api.post('/products/create', productData, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Lấy token từ localStorage
                 }

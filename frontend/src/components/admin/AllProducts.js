@@ -9,6 +9,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../../css/AllProduct.css';
 import '../../css/DeleteModal.css'
+import api from "../../api/Axios";
 
 function AllProducts() {
     const { Items, ModalOpen, productIdToDelete, setItems, setModalOpen, handleOpenModal, handleCloseModal } = useContext(ModalContext);
@@ -23,7 +24,7 @@ function AllProducts() {
         if (!token) {
             console.error('Người dùng chưa đăng nhập.');
         } else {
-            axios.get('http://localhost:5000/allproduct', {
+            api.get('/allproduct', {
                 headers: {
                     Authorization: `Bearer ${token}` // Gửi token trong header
                 }
@@ -43,7 +44,7 @@ function AllProducts() {
             if (!token) {
                 console.error('Người dùng chưa đăng nhập.');
             } else {
-                axios.delete(`http://localhost:5000/allproduct/${productIdToDelete}`, {
+                api.delete(`/allproduct/${productIdToDelete}`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Gửi token trong header
                     }
@@ -99,7 +100,7 @@ function AllProducts() {
                                             <h5>{item.name}</h5>
                                         </Link>
                                     </div>
-                                    <p className="newPrice-red"><span className="font-size_small">đ</span>{item.newPrice}</p>
+                                    <p className="newPrice-red"><span className="font-size_small"></span>{item.newPrice}đ</p>
                                     <p className="text-gray">Kho: 343</p>
                                 </div>
 

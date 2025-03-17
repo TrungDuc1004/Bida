@@ -15,6 +15,7 @@ import Register from './components/Register';
 import Profile from './components/Profile';
 import Checkout from './components/Checkout';
 import Order from './components/Order';
+import BookedTables from './components/pages/BookedTables';
 
 import ManagerSystem from './components/admin/ManagerSystem';
 import CreateProduct from './components/CreateProduct';
@@ -44,7 +45,7 @@ function App() {
                     <Route path="/" element={
                         <>
                             <Home />
-                            <Bestsellerproduct />
+                            {/* <Bestsellerproduct /> */}
                         </>
                     } />
                     
@@ -58,6 +59,7 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/order" element={<Order />} />
+                    <Route path="/booked-tables" element={<BookedTables/>} />
 
                     {/* Quản trị */}
                     <Route path="/manager/admin" element={<ManagerSystem />} />

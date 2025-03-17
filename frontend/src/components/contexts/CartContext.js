@@ -15,9 +15,7 @@ function CartProvider({ children }) {
             return;
         }
 
-        axios
-            .post(
-                `http://localhost:5000/cart/${productId}`,
+        axios.post(`http://localhost:5000/cart/${productId}`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },

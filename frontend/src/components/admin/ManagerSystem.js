@@ -3,9 +3,10 @@ import AllAccounts from "./AllAccounts";
 import AllProducts from "./AllProducts";
 import AllTables from "./AllTables";
 import AllOrders from "./AllOrders";
+import AllBookings from "./AllBookings";
 import { useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faShoppingCart, faUser, faCrown, faCheck } from '@fortawesome/free-solid-svg-icons';
 import '../../css/ManagerSystem.css'
 
 function ManagerSystem() {
@@ -22,6 +23,8 @@ function ManagerSystem() {
                 return <AllTables />
             case 'orders':
                 return <AllOrders />;
+            case 'orders':
+                return <AllBookings />;
             default:
                 return;
         }
@@ -49,7 +52,7 @@ function ManagerSystem() {
                     onClick={() => setActiveTab('tables')}
                     className={` ${activeTab === 'tables' ? 'nav-manager_active' : ''}`}
                 >
-                    <FontAwesomeIcon className='faUser' icon={faCalendar} />Bàn Bida
+                    <FontAwesomeIcon className='faUser' icon={faCrown} />Bàn Bida
                  </button>
 
                 <button
@@ -57,6 +60,12 @@ function ManagerSystem() {
                     className={` ${activeTab === 'orders' ? 'nav-manager_active' : ''}`}
                 >
                     <FontAwesomeIcon className='faUser' icon={faShoppingCart} />Đơn hàng
+                </button>
+                <button
+                    onClick={() => setActiveTab('bookings')}
+                    className={` ${activeTab === 'bookings' ? 'nav-manager_active' : ''}`}
+                >
+                    <FontAwesomeIcon className='faUser' icon={faCheck} />Danh sách bàn đặt
                 </button>
             </nav>
 

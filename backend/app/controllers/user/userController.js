@@ -22,7 +22,7 @@ exports.registerUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Lưu user mới
-        const newUser = new User({ username, email, password: hashedPassword, role, });
+        const newUser = new User({ username, email, password: hashedPassword, role: "user", });
         await newUser.save();
 
         res.status(201).json({ message: 'Đăng ký thành công' });
@@ -55,6 +55,22 @@ exports.loginUser = (req, res) => {
         .catch((error) => {
             console.error('Login error:', error); // Log lỗi nếu cần debug
             res.status(400).send('Error logging in');
+        });
+};
+
+// put[/user/profile]
+exports.profileUser = (req, res) => {
+    const { phonenumber, address, city, country } = req.body;
+    User.findOneAndUpdate({ username: req.body.username }, { phonenumber, address, city, country }, { new: true })
+        .then(updatedUser => {
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            res.json(updatedUser);
+        })
+        .catch(error => {
+            console.error('Error updating profile:', error);
+            res.status(500).json({ error: 'Internal server error' });
         });
 };
 

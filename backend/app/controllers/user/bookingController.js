@@ -1,52 +1,159 @@
 const Booking = require('../../models/Booking');
+const Table = require('../../models/Table');
 
-// POST [/booking] - Tạo đặt bàn mới
-exports.createBooking = (req, res) => {
-    const { tableId, startTime, endTime, numberOfPlayers, totalPrice } = req.body;
-    const userId = req.user.userId; // Lấy userId từ token đăng nhập
+// 🏓 Đặt bàn bida (POST /booking)
+exports.createBooking = async (req, res) => {
+    try {
+        console.log("User từ token:", req.user);
+        console.log("Request body:", req.body);
 
-    // Kiểm tra dữ liệu đầu vào
-    if (!tableId || !startTime || !endTime || !numberOfPlayers) {
-        return res.status(400).json({ success: false, message: 'Thiếu thông tin đặt bàn' });
+        const { tables, totalPrice } = req.body;
+        const userId = req.user?.userId;
+
+        if (!userId) {
+            return res.status(401).json({ error: "Bạn chưa đăng nhập hoặc phiên đăng nhập hết hạn!" });
+        }
+
+        if (!tables || !Array.isArray(tables) || tables.length === 0) {
+            return res.status(400).json({ error: "Danh sách bàn không hợp lệ!" });
+        }
+
+        // Kiểm tra bàn trống
+        const conflicts = await Promise.all(
+            tables.map(async (table) => {
+                const existingBooking = await Booking.findOne({
+                    "tables.tableId": table.tableId,
+                    "tables.time": table.time
+                });
+                return existingBooking ? table.tableId : null;
+            })
+        );
+
+        const bookedTables = conflicts.filter((tableId) => tableId !== null);
+        if (bookedTables.length > 0) {
+            return res.status(400).json({ error: `Bàn ${bookedTables.join(", ")} đã có người đặt!` });
+        }
+
+        // Đặt bàn: Cập nhật trạng thái bàn thành "booked"
+        await Table.updateMany(
+            { _id: { $in: tables.map(t => t.tableId) } },
+            { status: "booked" }
+        );
+
+        // Tạo đơn đặt bàn
+        const booking = new Booking({ userId, tables, totalPrice });
+        await booking.save();
+
+        res.status(201).json({ message: "Đặt bàn thành công!", booking });
+    } catch (error) {
+        console.error("Lỗi đặt bàn:", error);
+        res.status(500).json({ error: "Lỗi server" });
     }
-
-    // Tạo đặt bàn mới
-    const newBooking = new Booking({
-        userId,
-        tableId,
-        startTime,
-        endTime,
-        numberOfPlayers,
-        totalPrice
-    });
-
-    newBooking.save()
-        .then(savedBooking => res.status(201).json({ success: true, booking: savedBooking }))
-        .catch(error => {
-            console.error("Error creating booking:", error);
-            res.status(500).json({ success: false, message: 'Lỗi máy chủ', error: error.message });
-        });
 };
 
-// GET [/booking] - Lấy danh sách đặt bàn của người dùng hiện tại
-exports.listBookings = (req, res) => {
-    const userId = req.user.userId;
-    Booking.find({ userId }).lean()
-        .populate('tableId', 'name image location') // Lấy thông tin bàn bida
-        .then(bookings => res.json(bookings))
-        .catch(error => res.status(500).json({ message: error.message }));
+// 🏓 Lấy danh sách đặt bàn của người dùng (GET /booking)
+exports.listBookings = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const bookings = await Booking.find({ userId })
+            .populate('tables.tableId', 'name image location') // Lấy thông tin chi tiết bàn
+            .lean().sort({
+                createdAt: -1
+            });
+
+        res.json(bookings);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-// DELETE [/booking/:id] - Hủy đặt bàn
-exports.cancelBooking = (req, res) => {
-    Booking.findByIdAndDelete(req.params.id)
-        .then(() => res.status(200).json({ message: 'Đặt bàn đã được hủy' }))
-        .catch(error => res.status(500).json({ message: error.message }));
+// 🏓 Hủy đặt bàn (DELETE /booking/:id)
+exports.cancelBooking = async (req, res) => {
+    try {
+        const booking = await Booking.findById(req.params.id);
+        if (!booking) {
+            return res.status(404).json({ message: "Không tìm thấy đơn đặt bàn." });
+        }
+
+        // Cập nhật trạng thái bàn về "available"
+        await Table.updateMany(
+            { _id: { $in: booking.tables.map(t => t.tableId) } },
+            { status: "available" }
+        );
+
+        // Xóa đơn đặt bàn
+        await Booking.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({ message: "Hủy đặt bàn thành công!" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-// PUT [/booking/:id] - Chỉnh sửa đặt bàn
-exports.updateBooking = (req, res) => {
-    Booking.updateOne({ _id: req.params.id }, req.body)
-        .then(() => res.status(200).json({ success: true }))
-        .catch(error => res.status(500).json({ success: false, error: error.message }));
+// 🏓 Chỉnh sửa đặt bàn (PUT /booking/:id)
+// exports.updateBooking = async (req, res) => {
+//     try {
+//         const { tables, totalPrice } = req.body;
+
+//         await Booking.findByIdAndUpdate(req.params.id, { tables, totalPrice });
+
+//         res.status(200).json({ success: true, message: "Cập nhật đặt bàn thành công!" });
+//     } catch (error) {
+//         res.status(500).json({ success: false, error: error.message });
+//     }
+// };
+// cập nhập trạng thái bàn
+exports.updateTableStatus = async (req, res) => {
+    try {
+        console.log("nhan request", req.params.tableId, req.body);
+        
+        const { status } = req.body;
+        const { tableId } = req.params;
+
+        if (!status) {
+            return res.status(400).json({ error: "Trạng thái bàn không hợp lệ!" });
+        }
+
+        // Cập nhật trạng thái bàn
+        const table = await Table.findByIdAndUpdate(tableId, { status }, { new: true });
+
+        if (!table) {
+            return res.status(404).json({ error: "Không tìm thấy bàn!" });
+        }
+
+        res.status(200).json({ message: "Cập nhật trạng thái bàn thành công!", table });
+    } catch (error) {
+        console.error("Lỗi cập nhật trạng thái bàn:", error);
+        res.status(500).json({ error: "Lỗi server" });
+    }
+};
+
+// 🏓 Chỉnh sửa đặt bàn (PUT /booking/:id)
+exports.updateBooking = async (req, res) => {
+    try {
+        console.log("Nhận request cập nhật đặt bàn:", req.params.id, req.body);
+        
+        const { time, numberOfPlayers } = req.body;
+        const { id } = req.params;
+
+        if (!time || !numberOfPlayers) {
+            return res.status(400).json({ error: "Thời gian và số lượng người chơi không hợp lệ!" });
+        }
+
+        // Kiểm tra xem đặt bàn có tồn tại không
+        const booking = await Booking.findById(id);
+        if (!booking) {
+            return res.status(404).json({ error: "Không tìm thấy đơn đặt bàn!" });
+        }
+
+        // Cập nhật thông tin đặt bàn
+        booking.tables[0].time = time;
+        booking.tables[0].numberOfPlayers = numberOfPlayers;
+        await booking.save();
+
+        res.status(200).json({ message: "Cập nhật đặt bàn thành công!", booking });
+    } catch (error) {
+        console.error("Lỗi khi cập nhật đặt bàn:", error);
+        res.status(500).json({ error: "Lỗi server" });
+    }
 };

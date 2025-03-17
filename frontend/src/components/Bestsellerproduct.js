@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
 import { useState, useEffect } from "react";
 import { CartContext } from "./contexts/CartContext";
-import axios from 'axios';
+// import axios from 'axios';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import api from "../api/Axios";
 
 function Bestsellerproduct() {
     const { handleAddToCart } = useContext(CartContext);
@@ -13,7 +14,7 @@ function Bestsellerproduct() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/products/best-seller')
+        api.get('/products/best-seller')
             .then((res) => {
                 setProducts(res.data)
             })

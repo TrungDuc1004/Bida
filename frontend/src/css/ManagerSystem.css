@@ -1,55 +1,82 @@
 /* mobile and tablet: width <= 1024  */
 @media only screen and (max-width:63.9375em) {
-
     .commit-manager-system {
         flex-direction: column;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
+        padding: 10px;
+        gap: 15px;
     }
 
     .nav-manager-left {
-        flex-direction: row !important;
+        flex-direction: row;
         flex: 1 1 100%;
         max-width: 100%;
-        gap: 24px !important;
+        gap: 16px;
+        justify-content: center;
     }
 
     .nav-manager-left button {
         flex: 1 1 calc(33.33% - 16px);
         max-width: calc(33.33% - 16px);
-        box-sizing: border-box;
+        padding: 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        color: #333;
+    }
+
+    .nav-manager-left button:hover {
+        background-color: rgb(220, 230, 250);
+        color: rgb(0, 102, 204);
     }
 
     .nav-manager-right {
         flex: 1 1 100%;
         max-width: 100%;
+        text-align: center;
     }
 }
 
 .commit-manager-system {
     display: flex;
-    padding: 15px 0;
-    gap: 5px;
+    padding: 20px;
+    gap: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-manager-left {
     display: flex;
     flex-direction: column;
     background-color: rgb(246, 244, 244);
-    gap: 5px;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .nav-manager-left button {
-    padding: 13.5px;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: white;
+    transition: background-color 0.3s, transform 0.2s;
+    color: #222;
 }
 
-.nav-manager-left:hover button {
+.nav-manager-left button:hover {
     cursor: pointer;
+    background-color: rgb(235, 243, 255);
+    transform: scale(1.05);
+    color: rgb(0, 92, 184);
 }
 
 .nav-manager_active {
-    color: rgb(8, 109, 198);
-    background-color: rgb(211, 224, 239);
+    color: rgb(255, 255, 255);
+    background-color: rgb(8, 109, 198);
     border: none;
     border-right: 4px solid rgb(108, 136, 203);
+    font-weight: bold;
+    border-radius: 6px;
 }

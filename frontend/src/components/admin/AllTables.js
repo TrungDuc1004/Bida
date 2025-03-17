@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import '../../css/AllProduct.css';
+import '../../css/AllTable.css';
 import '../../css/DeleteModal.css'
 import api from "../../api/Axios";
 
@@ -93,8 +93,7 @@ function AllTables() {
                                             <h5>{item.name}</h5>
                                         </Link>
                                     </div>
-                                    <p className="newPrice-red"><span className="font-size_small">đ</span>{item.newPrice}</p>
-                                    <p className="text-gray">Kho: 343</p>
+                                    <p className="newPrice-red"><span className="font-size_small"></span>{item.newPrice}đ/1h</p>
                                 </div>
 
                                 <div className="col col-3 allproduct-item_quantity">

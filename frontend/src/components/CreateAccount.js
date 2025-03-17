@@ -4,6 +4,7 @@ import { ToastContext } from "./contexts/ToastContext";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import '../css/CreateProduct.css' // form giong nen dung lai
+import api from '../api/Axios';
 
 function CreateAccount() {
     const [username, setUserName] = useState('');
@@ -35,11 +36,7 @@ function CreateAccount() {
         if (!token) {
             showToast({ title: "Bạn cần đăng nhập trước!", type: "warning" });
         } else {
-            axios.post('http://localhost:5000/products/createaccount', accountData, {
-                headers: {
-                    Authorization: `Bearer ${token}`, // Lấy token từ localStorage
-                }
-            })
+            api.post('/products/createaccount', accountData, )
                 .then(response => {
                     navigate("/manager/admin");
                     showToast({ title: "Thêm tài khoản thành công!", type: "success" });

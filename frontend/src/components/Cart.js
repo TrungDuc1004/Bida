@@ -9,6 +9,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../css/Cart.css';
 import '../css/DeleteModal.css'
+import api from "../api/Axios";
 
 function Cart() {
     const { Items, ModalOpen, productIdToDelete, setItems, setModalOpen, handleOpenModal, handleCloseModal } = useContext(ModalContext);
@@ -22,7 +23,7 @@ function Cart() {
         if (!token) {
             console.error('Người dùng chưa đăng nhập.');
         } else {
-            axios.get('http://localhost:5000/cart', {
+            api.get('/cart', {
                 headers: {
                     Authorization: `Bearer ${token}` // Gửi token trong header
                 }
@@ -40,7 +41,7 @@ function Cart() {
     // Xử lý logic xóa sản phẩm
     const handleDelete = () => {
         if (productIdToDelete) {
-            axios.delete(`http://localhost:5000/cart/${productIdToDelete}`)
+            api.delete(`/cart/${productIdToDelete}`)
                 .then(response => {
                     setItems(prevItems => prevItems.filter(item => item._id !== productIdToDelete));
                 })
@@ -53,7 +54,7 @@ function Cart() {
 
     // + so luong
     const handlePlus = (productIdCart) => {
-        axios.put(`http://localhost:5000/cart/${productIdCart}`, { action: "increase" })
+        api.put(`/cart/${productIdCart}`, { action: "increase" })
             .then(response => {
                 setItems(prevItems => prevItems.map(item => item._id === productIdCart
                     ? { ...item, quantity: item.quantity + 1 }
@@ -69,7 +70,7 @@ function Cart() {
     const handleMinus = (productIdCart) => {
         const currentItem = Items.find(item => item._id === productIdCart);
         if (currentItem.quantity > 1) {
-            axios.put(`http://localhost:5000/cart/${productIdCart}`, { action: "decrease" })
+            api.put(`/cart/${productIdCart}`, { action: "decrease" })
                 .then(response => {
                     setItems(prevItems => prevItems.map(item => item._id === productIdCart
                         ? { ...item, quantity: item.quantity - 1 }
@@ -146,7 +147,7 @@ function Cart() {
                                         </Link>
                                     </div>
                                     <p className="newPrice-red"><span className="font-size_small">đ</span>{item.newPrice}</p>
-                                    <p className="text-gray">Kho: 343</p>
+                                    {/* <p className="text-gray">Kho: 343</p> */}
                                 </div>
 
                                 <div className="col col-4 cart-item_quantity">

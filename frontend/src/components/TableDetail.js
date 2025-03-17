@@ -14,7 +14,7 @@ function TableDetail() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get(`http://localhost:5000/table/${slug}`)
+        api.get(`/table/${slug}`)
             .then(response => {
                 setTable(response.data);
                 setLoading(false);
@@ -37,7 +37,7 @@ function TableDetail() {
             numPlayers,
         };
 
-        api.post("http://localhost:5000/bookings", bookingData)
+        api.post("/bookings", bookingData)
             .then(response => {
                 alert("Đặt bàn thành công!");
                 navigate("/bookings"); // Chuyển hướng đến danh sách đặt bàn

@@ -1,0 +1,157 @@
+/* mobile and tablet: width <= 1024  */
+@media only screen and (max-width:63.9375em) {
+}
+
+/* mobile : width < 740px */
+@media only screen and (max-width:46.1875em) {
+    .alltables-list:has(.alltables-order-empty) {
+        padding: 0 0 120px !important;
+    }
+
+    .alltables-item_info h5 {
+        font-size: 16px !important;
+    }
+
+    .alltables-title .col {
+        font-size: 13px !important;
+    }
+
+    .alltables-order-empty p {
+        font-size: 16px;
+    }
+
+    .alltables-order-empty img {
+        width: 100%;
+    }
+}
+
+/* Tablet: width >= 740px and width<1024px*/
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+    .alltables-order-empty p {
+        font-size: 17px !important;
+    }
+
+    .alltables-order-empty img {
+        width: 100%;
+    }
+}
+
+.alltables-list:has(.alltables-order-empty) {
+    padding-bottom: 150px;
+}
+
+.alltables-list {
+    position: relative;
+    border-left: 2px solid rgb(231, 230, 230);
+}
+
+.alltables-title {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #dadee3;
+}
+
+.alltables-title .col {
+    padding: 0px 0px 15px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #0a1d37;
+}
+
+.alltables {
+    display: flex;
+    justify-content: end;
+    background-color: rgb(243, 243, 243);
+    margin-bottom: 15px;
+}
+
+.alltables button {
+    color: white;
+    background-color: #0a1d37;
+    border: 2px solid #145eac;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.alltables-link button {
+    width: 100%;
+}
+
+.alltables-link:hover button {
+    border-radius: 5px;
+    background-color: #145eac;
+    cursor: pointer;
+}
+
+.alltables-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #dadee3;
+}
+
+.alltables-link_update {
+    text-decoration: none;
+    color: #086bd5;
+}
+
+.alltables-link_update:hover {
+    color: rgb(218, 88, 88);
+}
+
+.alltables-item_img {
+    padding: 0;
+}
+
+.alltables-item_img img {
+    width: 100%;
+    min-height: 65px;
+}
+
+.alltables-item_info h5 {
+    margin: 0;
+    padding-bottom: 7px;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(59, 58, 58);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    width: 85%;
+    height: 26px;
+}
+
+.alltables-item_info h5:hover {
+    text-decoration: underline;
+    color: #145eac;
+}
+
+.alltables-item_quantity {
+    display: flex;
+    align-items: center;
+}
+
+.trashcan {
+    margin-left: 40px;
+    font-size: 20px;
+    color: rgb(214, 15, 15);
+}
+
+.trashcan:hover {
+    cursor: pointer;
+}
+
+.alltables-order-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -80px;
+}
+
+.alltables-order-empty_back {
+    margin: 35px 0;
+    font-weight: 600;
+    font-size: 18px;
+}

@@ -13,7 +13,7 @@ const BookingSchema = new Schema({
             numberOfPlayers: { type: Number, required: true, min: 1 } // Số người chơi
         }
     ],
-    totalPrice: { type: Number, required: true }
+    totalPrice: { type: Number, required: true, min: 0 }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Booking', BookingSchema);

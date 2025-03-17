@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from "./contexts/CartContext";
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import '../css/ProductDetail.css';
+import api from '../api/Axios';
 
 function ProductDetail() {
     const { slug } = useParams();
@@ -20,7 +20,7 @@ function ProductDetail() {
     const { handleAddToCart } = useContext(CartContext);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/products/${slug}`)
+        api.get(`/products/${slug}`)
             .then(response => {
                 setProduct(response.data);
                 setLoading(false);
