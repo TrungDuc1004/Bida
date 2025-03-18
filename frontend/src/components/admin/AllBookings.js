@@ -17,7 +17,7 @@ function AllBookings() {
             return;
         }
 
-        api.get("/api/bookings", {
+        api.get("/bookings", {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => {
@@ -37,7 +37,7 @@ function AllBookings() {
             return;
         }
 
-        api.delete(`/api/bookings/${id}`, {
+        api.delete(`/bookings/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {

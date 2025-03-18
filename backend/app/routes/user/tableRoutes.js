@@ -8,7 +8,7 @@ router.get('/', tableController.getAllTables);
 router.get('/:id', tableController.getTable);
 router.put('/update/:id', verifyToken, tableController.updateTable);
 router.delete('/:id', verifyToken, tableController.deleteTable);
-router.get('/', verifyToken, tableController.getTableBySlug);
+// router.get('/', verifyToken, tableController.getTableBySlug);
 router.get('/available', verifyToken, tableController.getAvailableTables);
 
 module.exports = router;

@@ -26,11 +26,24 @@ exports.getProduct = (req, res) => {
 };
 
 // put[/products/update/:id]
-exports.updateProduct = (req, res) => {
-    Product.updateOne({ _id: req.params.id }, req.body)
-        .then(() => res.status(200).json({ success: true }))
-        .catch(error => res.status(500).json({ success: false, error: error.message }));
+exports.updateProduct = async (req, res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true } // Trả về dữ liệu mới, kiểm tra dữ liệu đầu vào
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).json({ success: false, message: "Product not found" });
+        }
+
+        res.status(200).json({ success: true, data: updatedProduct });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
+    }
 };
+
 
 ///
 // post[/products/createaccount]

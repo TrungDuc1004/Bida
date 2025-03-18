@@ -1,76 +1,57 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ToastContext } from "./contexts/ToastContext";
-import { useParams } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import '../css/CreateProduct.css' // form giong nhau nen dung lai
+import { useParams, Link } from 'react-router-dom';
 import api from '../api/Axios';
+import { ToastContext } from "./contexts/ToastContext";
+import '../css/CreateProduct.css';
 
-function UpdateProduct() {
+function UpdateTable() {
     const { id } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const [oldPrice, setOldPrice] = useState('');
     const [newPrice, setNewPrice] = useState('');
     const [location, setLocation] = useState('');
-    const [category, setCategory] = useState('');
-
-    const { showToast } = useContext(ToastContext)
-
+    
+    const { showToast } = useContext(ToastContext);
     const token = localStorage.getItem('token');
 
-    /// Lấy san pham theo id từ server khi load trang
     useEffect(() => {
         if (!token) {
             console.error('Người dùng chưa đăng nhập.');
         } else {
-            api.get(`/products/update/${id}/edit`, {
-                headers: {
-                    Authorization: `Bearer ${token}` // Gửi token trong header
-                }
+            api.get(`/table/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
                 .then(response => {
-                    const { name, description, image, oldPrice, newPrice, location, category } = response.data
+                    const { name, description, image, newPrice, location } = response.data;
                     setName(name);
                     setDescription(description);
                     setImage(image);
-                    setOldPrice(oldPrice);
                     setNewPrice(newPrice);
                     setLocation(location);
-                    setCategory(category);
                 })
                 .catch(error => {
-                    console.error('Lỗi khi tải:', error);
+                    console.error('Lỗi khi tải dữ liệu:', error);
                 });
         }
-    }, []);
+    }, [id, token]);
 
     const handleSubmitUpdate = (e) => {
         e.preventDefault();
 
-        const productData = {
-            name,
-            description,
-            image,
-            oldPrice,
-            newPrice,
-            location,
-            category
-        };
+        const tableData = { name, description, image, newPrice, location };
 
-        if (!localStorage.getItem('token')) {
+        if (!token) {
             showToast({ title: "Bạn cần đăng nhập trước!", type: "warning" });
         } else {
-            api.put(`/products/update/${id}`, productData, {
-                headers: {
-                    Authorization: `Bearer ${token}` // Gửi token trong header
-                }
+            api.put(`/table/update/${id}`, tableData, {
+                headers: { Authorization: `Bearer ${token}` }
             })
                 .then(response => {
                     showToast({ title: "Cập nhật thành công!", type: "success" });
                 })
                 .catch(error => {
-                    console.error('Error creating product:', error);  // Log lỗi khi tạo sản phẩm
+                    console.error('Lỗi khi cập nhật:', error);
                 });
         }
     };
@@ -78,27 +59,14 @@ function UpdateProduct() {
     return (
         <div>
             <div className='row'>
-                <div className="col col-12 img-extra">Cập nhật thông tin sản phẩm</div>
+                <div className="col col-12 img-extra">Cập nhật thông tin bàn</div>
             </div>
-
             <div className='container'>
-
-                <h2>Sửa thông tin :</h2>
-
+                <h2>Sửa thông tin bàn:</h2>
                 <form id='form' onSubmit={handleSubmitUpdate}>
-
                     <div className='form-input'>
-                        <label>Tên:</label>
+                        <label>Tên bàn:</label>
                         <input value={name} type="text" onChange={(e) => setName(e.target.value)} required />
-                    </div>
-
-                    <div className='form-input'>
-                        <label>Loại danh mục:</label>
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            <option>Chọn</option>
-                            <option>Đồ ăn</option>
-                            <option>Đồ uống</option>
-                        </select>
                     </div>
 
                     <div className='form-description-textarea'>
@@ -112,30 +80,25 @@ function UpdateProduct() {
                     </div>
 
                     <div className='form-input'>
-                        <label>Giá cũ:</label>
-                        <input value={oldPrice} type="text" onChange={(e) => setOldPrice(e.target.value)} required />
-                    </div>
-
-                    <div className='form-input'>
-                        <label>Giá mới:</label>
+                        <label>Giá thuê:</label>
                         <input value={newPrice} type="text" onChange={(e) => setNewPrice(e.target.value)} required />
                     </div>
 
                     <div className='form-input'>
                         <label>Vị trí:</label>
-                        <input value={location} type="text" onChange={(e) => setLocation(e.target.value)} maxLength="20" />
+                        <input value={location} type="text" onChange={(e) => setLocation(e.target.value)} maxLength="50" />
                     </div>
 
                     <Link to={`/manager/admin`}>
                         <button className='prd-button'>Quay lại</button>
                     </Link>
-
-                    <button className='prd-button' type="submit">Cập nhật</button>
-
+                    <Link to={`/manager/admin`}>
+                        <button className='prd-button' type="submit">Cập nhật</button>
+                    </Link>
                 </form>
             </div>
         </div>
     );
 }
 
-export default UpdateProduct;
+export default UpdateTable;

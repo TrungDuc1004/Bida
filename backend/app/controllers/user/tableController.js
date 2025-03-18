@@ -95,17 +95,17 @@ exports.getAllTables = async (req, res) => {
     }
 };
 // 🏓 6️⃣ Lấy chi tiết bàn bida theo slug (GET /tables/:slug)
-exports.getTableBySlug = async (req, res) => {
-    try {
-        const table = await Table.findOne({ slug: req.params.slug }).lean();
-        if (!table) {
-            return res.status(404).json({ message: "Không tìm thấy bàn bida." });
-        }
-        res.json(table);
-    } catch (error) {
-        res.status(500).json({ message: "Lỗi khi lấy thông tin bàn!", error: error.message });
-    }
-};
+// exports.getTableBySlug = async (req, res) => {
+//     try {
+//         const table = await Table.findOne({ slug: req.params.slug }).lean();
+//         if (!table) {
+//             return res.status(404).json({ message: "Không tìm thấy bàn bida." });
+//         }
+//         res.json(table);
+//     } catch (error) {
+//         res.status(500).json({ message: "Lỗi khi lấy thông tin bàn!", error: error.message });
+//     }
+// };
 
 // 🏓 Lấy danh sách bàn bida có thể đặt (GET /tables)
 exports.getAvailableTables = async (req, res) => {

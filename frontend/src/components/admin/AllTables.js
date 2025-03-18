@@ -1,5 +1,4 @@
 import React from "react";
-import axios from 'axios';
 import DeleteModal from "../DeleteModal";
 import { ModalContext } from "../contexts/ModalContext";
 import { useContext, useEffect } from "react";
@@ -24,7 +23,7 @@ function AllTables() {
         if (!token) {
             console.error('Người dùng chưa đăng nhập.');
         } else {
-            api.get('http://localhost:5000/allTable', {
+            api.get('/allTable', {
             })
                 .then(response => {
                     setItems(response.data) // Giỏ hàng từ API
@@ -40,13 +39,13 @@ function AllTables() {
             if (!token) {
                 console.error('Người dùng chưa đăng nhập.');
             } else {
-                api.delete(`http://localhost:5000/alltable/${tablesIdToDelete}`, {
+                api.delete(`/alltable/${tablesIdToDelete}`, {
                 })
                     .then(response => {
                         setItems(prevItems => prevItems.filter(item => item._id !== tablesIdToDelete));
                     })
                     .catch((error) => {
-                        console.error('Error deleting product from cart:', error);
+                        console.error('Error deleting table from cart:', error);
                     });
             }
         }
@@ -80,38 +79,38 @@ function AllTables() {
                 <div className="">
                     {Items.length > 0 ? (
                         Items.map(item => (
-                            <div className="row allproduct-item" key={item._id}>
+                            <div className="row alltable-item" key={item._id}>
                                 <div className="col col-1 allproduct-item_img">
-                                    <Link to={`/product/${item.slug}`}>
+                                    <Link to={`/table/${item.slug}`}>
                                         <img src={item.image} alt='' />
                                     </Link>
                                 </div>
 
-                                <div className="col col-5 allproduct-item_info">
+                                <div className="col col-5 alltable-item_info">
                                     <div>
-                                        <Link className="remove-text-decoration" to={`/product/${item.slug}`}>
+                                        <Link className="remove-text-decoration" to={`/table/${item.slug}`}>
                                             <h5>{item.name}</h5>
                                         </Link>
                                     </div>
                                     <p className="newPrice-red"><span className="font-size_small"></span>{item.newPrice}đ/1h</p>
                                 </div>
 
-                                <div className="col col-3 allproduct-item_quantity">
+                                <div className="col col-3 alltable-item_quantity">
                                     <div onClick={() => handleOpenModal(item._id)}>
                                         <FontAwesomeIcon className="trashcan" icon={faTrashCan} />
                                     </div>
                                 </div>
 
                                 <div className="col col-3">
-                                    <Link className="allproduct-link_update" to={`/update/${item._id}/edit`}>Sửa thông tin</Link>
+                                    <Link className="alltable-link_update" to={`/edit/${item._id}/update`}>Sửa thông tin</Link>
                                 </div>
                             </div>
                         ))
                     ) : (
-                        <div className="allproduct-order-empty">
-                            <div className="allproduct-order-empty_back">
+                        <div className="alltable-order-empty">
+                            <div className="alltable-order-empty_back">
                                 <p>Sản phẩm trống.
-                                    <Link className='remove-text-decoration color-text-home' to={`/menu`}> Thêm sản phẩm ngay!</Link>
+                                    <Link className='remove-text-decoration color-text-home' to={`/table`}> Thêm sản phẩm ngay!</Link>
                                 </p>
                             </div>
 

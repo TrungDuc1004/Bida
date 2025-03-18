@@ -21,6 +21,7 @@ import ManagerSystem from './components/admin/ManagerSystem';
 import CreateProduct from './components/CreateProduct';
 import CreateTable from "./components/CreateTable";  // Import component
 import UpdateProduct from './components/UpdateProduct';
+import UpdateTable from './components/UpdateTable';
 import CreateAccount from './components/CreateAccount';
 import UpdateAccount from './components/UpdateAccount';
 
@@ -66,6 +67,7 @@ function App() {
                     <Route path="/create" element={<CreateProduct />} />
                     <Route path="/createTable" element={<CreateTable />} />
                     <Route path="/update/:id/edit" element={<UpdateProduct />} />
+                    <Route path="/edit/:id/update" element={<UpdateTable />} />
                     <Route path="/create-account" element={<CreateAccount />} />
                     <Route path="/update/:id/edit-account" element={<UpdateAccount />} />
                 </Routes>
