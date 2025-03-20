@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../components/contexts/AuthContext';
 import { ToastContext } from '../../components/contexts/ToastContext';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import CartIcon from '../CartIcon';
 import { faBowlingBall } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
@@ -37,7 +37,6 @@ function Navbar() {
                 <NavLink to='/' className='nav-header-between_home' activeClassName='active'>Trang chủ</NavLink>
                 <NavLink to='/table' className='nav-header-between_table' activeClassName='active'>Bàn bida</NavLink>
                 <NavLink to='/menu' className='nav-header-between_shop' activeClassName='active'>Đồ ăn vặt</NavLink>
-                <NavLink to='/cart' className='nav-header-between_cart' activeClassName='active'>Giỏ hàng</NavLink>
             </div>
 
             <div className='col col-4 nav-header-right'>
@@ -46,7 +45,8 @@ function Navbar() {
                 <label htmlFor='checkbox_navbar' className='overlay_navbar'></label>
 
                 <Link to='/cart' className='nav-header-right_cart'>
-                    <FontAwesomeIcon className='faCartShopping' icon={faCartShopping} />
+                    {/* <FontAwesomeIcon className='faCartShopping' icon={faCartShopping} /> */}
+                    <CartIcon />
                 </Link>
 
                 {loggedIn ? (

@@ -1,7 +1,7 @@
 import React from "react";
-import axios from 'axios';
 import DeleteModal from "./DeleteModal";
 import { ModalContext } from "./contexts/ModalContext";
+import { CartContext } from "./contexts/CartContext";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ import api from "../api/Axios";
 
 function Cart() {
     const { Items, ModalOpen, productIdToDelete, setItems, setModalOpen, handleOpenModal, handleCloseModal } = useContext(ModalContext);
-    //
+    const {cartCount, setCartCount} = useContext(CartContext);
     const navigate = useNavigate();
 
     /// Lấy giỏ hàng từ server khi load trang
@@ -42,15 +42,22 @@ function Cart() {
     const handleDelete = () => {
         if (productIdToDelete) {
             api.delete(`/cart/${productIdToDelete}`)
-                .then(response => {
-                    setItems(prevItems => prevItems.filter(item => item._id !== productIdToDelete));
+                .then(() => {
+                    setItems(prevItems => {
+                        const updatedItems = prevItems.filter(item => item._id !== productIdToDelete);
+                        
+                        // 🔹 Tính lại số lượng sản phẩm trong giỏ hàng
+                        const newCartCount = updatedItems.reduce((total, item) => total + item.quantity, 0);
+                        setCartCount(newCartCount);
+    
+                        return updatedItems;
+                    });
                 })
-                .catch((error) => {
-                    console.error('Error deleting product from cart:', error);
-                });
+                .catch(error => console.error('Lỗi khi xóa sản phẩm:', error));
         }
         setModalOpen(false);
     };
+    
 
     // + so luong
     const handlePlus = (productIdCart) => {

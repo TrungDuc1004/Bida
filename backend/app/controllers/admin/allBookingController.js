@@ -13,3 +13,4 @@ exports.deleteOneBooking = (req, res) => {
         .then(() => res.status(200).json({ message: 'Booking deleted successfully' }))
         .catch(error => res.status(500).json({ message: error.message }));
 };
+

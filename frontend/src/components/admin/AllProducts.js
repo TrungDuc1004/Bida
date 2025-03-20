@@ -65,11 +65,14 @@ function AllProducts() {
             <div className="allproduct-list">
                 {Items.length > 0 ? (
                     <div className="allproduct">
-                        <div className="col col-2 allproduct-link">
+                        <div className="allproduct-link">
                             <Link to={`/create`}>
                                 <button>
                                     Thêm sản phẩm
                                 </button>
+                            </Link>
+                            <Link to="/manager/admin">
+                                <button>Quay lại</button>
                             </Link>
                         </div>
                     </div>

@@ -57,6 +57,9 @@ function AllOrders() {
     return (
         <div>
             <div className="allorder-list">
+                <Link to="/manager/admin">
+                    <button className="back-to-admin">Quay lại</button>
+                </Link>
                 {Items.length > 0 ? (
                     <div className="row allorder-title">
                         <div className="col col-1">Ảnh</div>
@@ -114,7 +117,7 @@ function AllOrders() {
                             </div>
 
                             <div>
-                                <img src="../img/cart-empty.png"></img>
+                                <img src="/img/cart-empty.png"></img>
                             </div>
                         </div>
                     )}
@@ -126,6 +129,7 @@ function AllOrders() {
                         handleDelete={handleDelete}
                     />
                 </div>
+
             </div>
         </div>
     )

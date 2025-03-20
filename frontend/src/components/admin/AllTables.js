@@ -59,9 +59,10 @@ function AllTables() {
                     <div className="alltables">
                         <div className="col col-2 alltables-link">
                             <Link to={`/createTable `}>
-                                <button>
-                                    Thêm bàn Bida
-                                </button>
+                                <button className="add-button">Thêm bàn Bida</button>
+                            </Link>
+                            <Link to="/manager/admin">
+                                <button className="back-button">Quay Lại</button>
                             </Link>
                         </div>
                     </div>

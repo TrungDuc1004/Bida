@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AllAccounts from "./AllAccounts";
 import AllProducts from "./AllProducts";
 import AllTables from "./AllTables";
@@ -34,39 +35,46 @@ function ManagerSystem() {
         <div className="row commit-manager-system">
             {/* Sidebar */}
             <nav className="row nav-manager-left col col-2">
-                <button
-                    onClick={() => setActiveTab('users')}
-                    className={`${activeTab === 'users' ? 'nav-manager_active' : ''}`}
-                >
-                    <FontAwesomeIcon className='faUser' icon={faUser} />Người dùng
-                </button>
+                    <button
+                        onClick={() => setActiveTab('users')}
+                        className={`${activeTab === 'users' ? 'nav-manager_active' : ''}`}
+                    >
+                        <FontAwesomeIcon className='faUser' icon={faUser} />Người dùng
+                    </button>
+                <Link to="/manager/admin/products">
+                    <button
+                        onClick={() => setActiveTab('products')}
+                        className={` ${activeTab === 'products' ? 'nav-manager_active' : ''}`}
+                    >
+                        <FontAwesomeIcon className='faUser' icon={faCalendar} />Sản phẩm
+                    </button>
+                </Link>
 
-                <button
-                    onClick={() => setActiveTab('products')}
-                    className={` ${activeTab === 'products' ? 'nav-manager_active' : ''}`}
-                >
-                    <FontAwesomeIcon className='faUser' icon={faCalendar} />Sản phẩm
-                </button>
+                <Link to="/manager/admin/tables">
+                    <button
+                        onClick={() => setActiveTab('tables')}
+                        className={` ${activeTab === 'tables' ? 'nav-manager_active' : ''}`}
+                    >
+                        <FontAwesomeIcon className='faUser' icon={faCrown} />Bàn Bida
+                    </button>
+                </Link>
 
-                                <button
-                    onClick={() => setActiveTab('tables')}
-                    className={` ${activeTab === 'tables' ? 'nav-manager_active' : ''}`}
-                >
-                    <FontAwesomeIcon className='faUser' icon={faCrown} />Bàn Bida
-                 </button>
-
-                <button
-                    onClick={() => setActiveTab('orders')}
-                    className={` ${activeTab === 'orders' ? 'nav-manager_active' : ''}`}
-                >
-                    <FontAwesomeIcon className='faUser' icon={faShoppingCart} />Đơn hàng
-                </button>
-                <button
-                    onClick={() => setActiveTab('bookings')}
-                    className={` ${activeTab === 'bookings' ? 'nav-manager_active' : ''}`}
-                >
-                    <FontAwesomeIcon className='faUser' icon={faCheck} />Danh sách bàn đặt
-                </button>
+                <Link to="/manager/admin/orders">
+                    <button
+                        onClick={() => setActiveTab('orders')}
+                        className={` ${activeTab === 'orders' ? 'nav-manager_active' : ''}`}
+                    >
+                        <FontAwesomeIcon className='faUser' icon={faShoppingCart} />Đơn hàng
+                    </button>
+                </Link>
+                <Link to="/manager/admin/bookings">
+                    <button
+                        onClick={() => setActiveTab('bookings')}
+                        className={` ${activeTab === 'bookings' ? 'nav-manager_active' : ''}`}
+                    >
+                        <FontAwesomeIcon className='faUser' icon={faCheck} />Danh sách bàn đặt
+                    </button>
+                </Link>
             </nav>
 
             {/* Nội dung bên phải */}

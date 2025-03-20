@@ -42,7 +42,7 @@ app.use('/bookings', bookingRoutes);
 app.use('/user', userRoutes);
 //admin
 app.use('/allorder', allOrderRoutes);
-app.use('/allbooking', allBookingRoutes);
+app.use('/allbookings', allBookingRoutes);
 app.use('/allproduct', allProductRoutes);
 app.use('/alltable', allTableRoutes);
 app.use('/allaccount', allAccountRoutes);

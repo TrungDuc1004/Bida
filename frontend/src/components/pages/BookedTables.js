@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../api/Axios';
 
 function BookedTables() {
@@ -121,9 +121,11 @@ function BookedTables() {
                                     <button onClick={() => handleEditBooking(booking)} className="edit-btn">
                                         Chỉnh sửa
                                     </button>
-                                    <button onClick={() => handleCancelBooking(booking._id, booking.tables[0].tableId)} className="cancel-btn">
-                                        Hủy đặt bàn
-                                    </button>
+                                    <Link to="/table">
+                                        <button onClick={() => handleCancelBooking(booking._id, booking.tables[0].tableId)} className="cancel-btn">
+                                            Hủy đặt bàn
+                                        </button>
+                                    </Link>
                                 </>
                             )}
                         </div>

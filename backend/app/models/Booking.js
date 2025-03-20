@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userName: { type: String, required: true }, 
     tables: [
         {
             tableId: { type: mongoose.Schema.Types.ObjectId, ref: 'Table', required: true },

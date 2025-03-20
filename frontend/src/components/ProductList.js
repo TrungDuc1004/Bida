@@ -162,7 +162,7 @@ function ProductList() {
                     }
                 </div >
 
-                <div className="btn-common-pagination">
+                {/* <div className="btn-common-pagination">
                     <button className="btn btn-backward-prd" onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
                         <FontAwesomeIcon icon={faBackward} />
                     </button>
@@ -172,7 +172,7 @@ function ProductList() {
                     <button className="btn btn-nextward-prd" onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
                         <FontAwesomeIcon icon={faForward} />
                     </button>
-                </div>
+                </div> */}
             </div>
         </div >
     );

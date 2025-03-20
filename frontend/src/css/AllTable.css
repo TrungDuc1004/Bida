@@ -60,7 +60,7 @@
 
 .alltables {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     background-color: rgb(243, 243, 243);
     margin-bottom: 15px;
 }
@@ -72,9 +72,16 @@
     border-radius: 5px;
     padding: 12px;
 }
+.alltables-link {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
 .alltables-link button {
-    width: 100%;
+    width: auto;
+    min-width: 150px;
+    text-align: center;
 }
 
 .alltables-link:hover button {

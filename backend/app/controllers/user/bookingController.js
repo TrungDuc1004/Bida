@@ -1,3 +1,4 @@
+const User = require("../../models/User")
 const Booking = require('../../models/Booking');
 const Table = require('../../models/Table');
 
@@ -6,13 +7,20 @@ exports.createBooking = async (req, res) => {
     try {
         console.log("User từ token:", req.user);
         console.log("Request body:", req.body);
-
+        const bookings = await Booking.find().populate("userId", "username")
         const { tables, totalPrice } = req.body;
         const userId = req.user?.userId;
 
         if (!userId) {
             return res.status(401).json({ error: "Bạn chưa đăng nhập hoặc phiên đăng nhập hết hạn!" });
         }
+        // 🛑 Lấy thông tin userName từ User model
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "Không tìm thấy tài khoản!" });
+        }
+
+        const username = user.username;
 
         if (!tables || !Array.isArray(tables) || tables.length === 0) {
             return res.status(400).json({ error: "Danh sách bàn không hợp lệ!" });
@@ -41,7 +49,15 @@ exports.createBooking = async (req, res) => {
         );
 
         // Tạo đơn đặt bàn
-        const booking = new Booking({ userId, tables, totalPrice });
+        const booking = new Booking({ 
+            userId, 
+            userName: username, 
+            tables, 
+            totalPrice, 
+            status: "confirmed"
+        });
+        console.log("đã lưu", booking);
+        
         await booking.save();
 
         res.status(201).json({ message: "Đặt bàn thành công!", booking });
@@ -73,8 +89,11 @@ exports.cancelBooking = async (req, res) => {
         const booking = await Booking.findById(req.params.id);
         if (!booking) {
             return res.status(404).json({ message: "Không tìm thấy đơn đặt bàn." });
-        }
 
+        }
+        
+        booking.status = "canceled";
+        await booking.save()
         // Cập nhật trạng thái bàn về "available"
         await Table.updateMany(
             { _id: { $in: booking.tables.map(t => t.tableId) } },
@@ -106,7 +125,7 @@ exports.cancelBooking = async (req, res) => {
 exports.updateTableStatus = async (req, res) => {
     try {
         console.log("nhan request", req.params.tableId, req.body);
-        
+
         const { status } = req.body;
         const { tableId } = req.params;
 
@@ -132,7 +151,7 @@ exports.updateTableStatus = async (req, res) => {
 exports.updateBooking = async (req, res) => {
     try {
         console.log("Nhận request cập nhật đặt bàn:", req.params.id, req.body);
-        
+
         const { time, numberOfPlayers } = req.body;
         const { id } = req.params;
 

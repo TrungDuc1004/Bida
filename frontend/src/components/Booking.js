@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate , useHistt} from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { useNavigate, } from 'react-router-dom';
 import api from '../api/Axios';
 
 function Booking({ table, fetchTables }) {
     const [selectedTime, setSelectedTime] = useState("");
     const [numberOfPlayers, setNumberOfPlayers] = useState(1);
+    const [error, setError] = useState(false)
+    const dateTimeRef = useRef(null);
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
+    const username = localStorage.getItem('username')
     const navigate = useNavigate();
 
     const handleBooking = async () => {
@@ -17,12 +20,15 @@ function Booking({ table, fetchTables }) {
 
         if (!selectedTime || isNaN(Date.parse(selectedTime))) {
             alert("Vui lòng chọn thời gian hợp lệ!");
+            setError(true);
+            dateTimeRef.current.focus()
             return;
         }
 
         try {
             await api.post("/bookings", {
                 userId,
+                username,
                 tables: [{
                     tableId: table._id,
                     name: table.name,
@@ -36,14 +42,11 @@ function Booking({ table, fetchTables }) {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            // await api.put(`/table/${table._id}/status`, { status: "booked" });
+            await api.put(`/table/${table._id}/status`, { status: "booked" });
+
+            fetchTables();
 
             alert("Đặt bàn thành công!");
-
-            // Cập nhật lại danh sách bàn trống
-            // fetchTables();
-
-            // Điều hướng sang trang bàn đã đặt
             navigate("/booked-tables");
 
         } catch (error) {
@@ -52,10 +55,21 @@ function Booking({ table, fetchTables }) {
         }
     };
 
+
     return (
         <div className="booking-container">
             <label>Chọn thời gian đặt bàn:</label>
-            <input type="datetime-local" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} />
+            <input
+                ref={dateTimeRef}
+                type="datetime-local"
+                className={error ? "input-error" : ""}
+                value={selectedTime}
+                onChange={(e) => { 
+                    setSelectedTime(e.target.value)
+                    setError(false);
+                }}
+            />
+            {error && <p className='error-text'>Vui lòng nhập thời gian </p>}
 
             <label>Số người chơi:</label>
             <input type="number" min="1" value={numberOfPlayers} onChange={(e) => setNumberOfPlayers(parseInt(e.target.value) || 1)} />

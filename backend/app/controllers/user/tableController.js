@@ -108,24 +108,24 @@ exports.getAllTables = async (req, res) => {
 // };
 
 // 🏓 Lấy danh sách bàn bida có thể đặt (GET /tables)
-exports.getAvailableTables = async (req, res) => {
+// 🏓 7️⃣ Cập nhật trạng thái bàn (PUT /tables/:id/status)
+exports.updateTableStatus = async (req, res) => {
     try {
-        const { selectedTime } = req.query;
+        const { status } = req.body;
 
-        if (!selectedTime || isNaN(Date.parse(selectedTime))) {
-            return res.status(400).json({ error: "Thời gian không hợp lệ!" });
+        if (!status) {
+            return res.status(400).json({ message: "Vui lòng cung cấp trạng thái bàn!" });
         }
 
-        // Lấy danh sách bàn đã đặt vào thời gian đó
-        const bookedTables = await Booking.find({ "tables.time": selectedTime }).distinct("tables.tableId");
+        const table = await Table.findByIdAndUpdate(req.params.id, { status }, { new: true });
 
-        // Lấy danh sách bàn còn trống
-        const availableTables = await Table.find({ _id: { $nin: bookedTables }, status: "available" });
+        if (!table) {
+            return res.status(404).json({ message: "Không tìm thấy bàn bida." });
+        }
 
-        res.json({ success: true, availableTables });
+        res.status(200).json({ message: "Cập nhật trạng thái bàn thành công!", table });
     } catch (error) {
-        console.error("Lỗi lấy bàn trống:", error);
-        res.status(500).json({ error: "Lỗi server!" });
+        res.status(500).json({ message: "Lỗi khi cập nhật trạng thái bàn!", error: error.message });
     }
 };
 

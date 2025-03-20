@@ -27,6 +27,10 @@ import UpdateAccount from './components/UpdateAccount';
 
 import './css/App.css';
 import './css/Toast.css';
+import AllProducts from './components/admin/AllProducts';
+import AllOrders from './components/admin/AllOrders';
+import AllTables from './components/admin/AllTables';
+import AllBookings from './components/admin/AllBookings';
 
 function App() {
     return (
@@ -64,6 +68,10 @@ function App() {
 
                     {/* Quản trị */}
                     <Route path="/manager/admin" element={<ManagerSystem />} />
+                    <Route path="/manager/admin/products" element={<AllProducts />}/>
+                    <Route path="/manager/admin/tables" element={<AllTables />}/>
+                    <Route path="/manager/admin/orders" element={<AllOrders />}/>
+                    <Route path="/manager/admin/bookings" element={<AllBookings/>} />
                     <Route path="/create" element={<CreateProduct />} />
                     <Route path="/createTable" element={<CreateTable />} />
                     <Route path="/update/:id/edit" element={<UpdateProduct />} />
